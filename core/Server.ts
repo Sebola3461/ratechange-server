@@ -1,10 +1,10 @@
-import { SpectroServer } from "../network/SpectroServer";
+import { RateChangeServer } from "../network/RateChangeServer";
 
 export class Server {
   public server;
 
   constructor() {
-    this.server = new SpectroServer(this);
+    this.server = new RateChangeServer(this);
   }
 
   initialize() {

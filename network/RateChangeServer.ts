@@ -4,11 +4,11 @@ import timeout from "connect-timeout";
 import { RouterManager } from "./RouterManager";
 import { LoggerService } from "../helpers/terminal/LoggerService";
 
-export class SpectroServer {
+export class RateChangeServer {
   public axer: Server;
   public routerManager: RouterManager;
   public router;
-  public logger = new LoggerService("SpectroServer");
+  public logger = new LoggerService("RateChangeServer");
 
   constructor(axer: Server) {
     this.axer = axer;

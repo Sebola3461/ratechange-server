@@ -1,16 +1,16 @@
 import { Server } from "../core/Server";
 import { LoggerService } from "../helpers/terminal/LoggerService";
-import { SpectroServer } from "./SpectroServer";
+import { RateChangeServer } from "./RateChangeServer";
 import { AvailableRoutes } from "./routes";
 import { Route, RouteMethod } from "./struct/Route";
 
 export class RouterManager {
   public routes: Route[] = [];
   public axer: Server;
-  public server: SpectroServer;
+  public server: RateChangeServer;
   private logger = new LoggerService("RouteManager");
 
-  constructor(axer: Server, server: SpectroServer) {
+  constructor(axer: Server, server: RateChangeServer) {
     this.axer = axer;
     this.server = server;
   }
