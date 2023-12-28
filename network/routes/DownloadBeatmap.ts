@@ -15,26 +15,13 @@ export const DownloadBeatmap = new Route(
   );
 
   if (!existsSync(basePath))
-    return route.handleError(res, 404, "File not found!");
+    return route.handleError(res, 404, "File not found or expired!");
 
   const basePathContents = readdirSync(basePath);
   const oszFileName = basePathContents.find((file) => file.endsWith(".osz"));
 
-  if (!oszFileName) return route.handleError(res, 404, "File not found!");
+  if (!oszFileName)
+    return route.handleError(res, 404, "File not found or expired!");
 
   res.status(200).download(resolve(join(basePath, oszFileName)));
-
-  res.on("close", () => {
-    try {
-      rmSync(basePath, { recursive: true });
-      rmSync(
-        join(process.env.AXERBOT_RATECHANGE_OUTPUT_PATH as string, fileId),
-        {
-          recursive: true,
-        }
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  });
 });
