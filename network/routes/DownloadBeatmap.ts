@@ -1,6 +1,6 @@
 import { join, resolve } from "path";
 import { Route, RouteMethod } from "../struct/Route";
-import { existsSync, readdirSync, rmSync, unlinkSync } from "fs";
+import { existsSync, readdirSync } from "fs";
 
 export const DownloadBeatmap = new Route(
   "/ratechange/download/:fileId",
