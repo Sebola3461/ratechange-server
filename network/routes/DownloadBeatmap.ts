@@ -3,15 +3,27 @@ import { Route, RouteMethod } from "../struct/Route";
 import { existsSync, readdirSync } from "fs";
 
 export const DownloadBeatmap = new Route(
-  "/ratechange/download/:fileId",
+  "/:type/download/:fileId",
   RouteMethod.GET
 ).setExecutable((axer, route, req, res) => {
   const fileId = req.params.fileId;
+  const type = req.params.type;
+  const types = ["ratechange", "svscaler"];
 
-  if (!fileId) return route.handleError(res, 400, "Invalid form body");
+  if (!fileId || !type) return route.handleError(res, 400, "Invalid form");
+
+  if (!types.includes(type))
+    return route.handleError(res, 404, "Invalid path!");
 
   const basePath = resolve(
-    join(process.env.AXERBOT_RATECHANGE_OUTPUT_PATH as string, "osz", fileId)
+    join(
+      (process.env.AXERBOT_RATECHANGE_OUTPUT_PATH as string).replace(
+        "{type}",
+        type
+      ),
+      "osz",
+      fileId
+    )
   );
 
   if (!existsSync(basePath))
